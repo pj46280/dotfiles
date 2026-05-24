@@ -92,6 +92,29 @@ require("lazy").setup({
         -- if you wish to use your own colorscheme:
         -- { dir = '/absolute/path/to/colorscheme', lazy = true },
     },
+    -- Rainbow Brackets
+    {
+        "HiPhish/rainbow-delimiters.nvim",
+        config = function()
+            require("rainbow-delimiters.setup").setup({})
+        end,
+    },
+
+    -- Statusline
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons"
+        }
+    },
+
+    -- Sidebar
+    {
+        "nvim-tree/nvim-tree.lua",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        },
+    },
 
     -- Better syntax highlighting
     {
@@ -101,7 +124,7 @@ require("lazy").setup({
 })
 
 require("tokyonight").setup({
-    -- style = "storm",
+    style = "storm",
     -- style = "moon",
     -- style = "night",
     -- style = "day",
@@ -121,9 +144,9 @@ require("kanagawa").setup({
 })
 
 require("everforest").setup({
-    -- background = "soft",
+    background = "soft",
     -- background = "medium",
-    background = "hard",
+    -- background = "hard",
 })
 
 require("material").setup({
@@ -139,7 +162,7 @@ require("material").setup({
 -- Colorscheme
 -- =========================
 
--- vim.cmd.colorscheme("tokyonight")
+vim.cmd.colorscheme("tokyonight")
 -- vim.cmd.colorscheme("catppuccin")
 -- vim.cmd.colorscheme("kanagawa")
 -- vim.cmd.colorscheme("habamax")
@@ -196,3 +219,45 @@ require("nvim-treesitter.configs").setup({
         enable = true,
     },
 })
+
+-- Rainbow brackets
+require("rainbow-delimiters.setup").setup({
+    strategy = {
+        [""] = require("rainbow-delimiters").strategy["global"],
+    },
+    highlight = {
+        "RainbowDelimiterRed",
+        "RainbowDelimiterYellow",
+        "RainbowDelimiterBlue",
+        "RainbowDelimiterOrange",
+        "RainbowDelimiterGreen",
+        "RainbowDelimiterViolet",
+        "RainbowDelimiterCyan",
+    },
+})
+
+-- Statusline
+require("lualine").setup({
+    options = {
+        theme = "auto",
+        section_separators = "",
+        component_separators = "",
+    },
+})
+
+-- Sidebar
+require("nvim-tree").setup()
+vim.keymap.set("n", "<C-b>", ":NvimTreeToggle<CR>")
+
+
+-- Better cursor
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20"
+
+-- Smooth Syntax
+vim.api.nvim_set_hl(0, "Comment", {
+    italic = true
+})
+vim.api.nvim_set_hl(0, "Function", {
+    bold = true
+})
+
